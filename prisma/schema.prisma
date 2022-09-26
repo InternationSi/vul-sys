@@ -1,0 +1,36 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Field {
+  id        BigInt  @id @default(autoincrement())
+  fieldName String? @db.VarChar(255)
+  label     String? @db.VarChar(255)
+  selfType  String? @db.VarChar(255)
+  Module    Module? @relation(fields: [moduleId], references: [id])
+  moduleId  Int?    @db.UnsignedInt
+}
+
+model Module {
+  id             Int       @id @default(autoincrement()) @db.UnsignedInt
+  createdAt      DateTime? @default(now())
+  moduleName     String?   @unique @db.VarChar(255)
+  label          String?   @db.VarChar(255)
+  category       String?   @db.VarChar(255)
+  updateUser     String?   @db.VarChar(255)
+  namespacesName String?   @db.VarChar(255)
+  fields         Field[]
+}
+
+model NameSpace {
+  id             Int      @id @default(autoincrement()) @db.UnsignedInt
+  createdAt      DateTime @default(now())
+  namespacesName String?  @unique @db.VarChar(255)
+  label          String?  @db.VarChar(255)
+  describe       String?  @db.VarChar(255)
+}
