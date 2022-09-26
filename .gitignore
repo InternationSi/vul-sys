@@ -192,6 +192,7 @@ gen
 # Local History for Visual Studio Code
 .history/
 
+
 ### PuTTY template
 # Private key
 *.ppk
