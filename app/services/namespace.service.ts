@@ -2,7 +2,7 @@
  * @Author: sfy
  * @Date: 2022-09-25 23:01:17
  * @LastEditors: sfy
- * @LastEditTime: 2022-09-26 23:07:32
+ * @LastEditTime: 2022-09-27 23:05:05
  * @FilePath: /vul-sys/app/services/namespace.service.ts
  * @Description: update here
  */
@@ -22,7 +22,6 @@ export class NameSpaceService {
         namespacesName,
       },
     })
-    console.log(nsList, 'nsList');
     if(nsList.length >= 1) {
       return null
     }
@@ -34,5 +33,32 @@ export class NameSpaceService {
       },
     })
     return newNs    
+  }
+  async editNs(ns:NsParamsType) {
+    const {namespacesName} = ns
+    try {
+      const updateNs = await prisma.nameSpace.update({
+        where: {
+          namespacesName,
+        },
+        data: ns,
+      })
+      return updateNs
+    } catch(e) {
+      return false
+    }
+  }
+
+  async delNs(namespacesName:string) {
+    try {
+      const deleteNs = await prisma.nameSpace.delete({
+        where: {
+          namespacesName,
+        },
+      })
+      return deleteNs
+    } catch(e) {
+      return false
+    }
   }
 }

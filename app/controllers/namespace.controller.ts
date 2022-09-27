@@ -2,7 +2,7 @@
  * @Author: sfy
  * @Date: 2022-09-25 23:01:17
  * @LastEditors: sfy
- * @LastEditTime: 2022-09-26 22:37:35
+ * @LastEditTime: 2022-09-27 23:05:25
  * @FilePath: /vul-sys/app/controllers/namespace.controller.ts
  * @Description: update here
  */
@@ -12,6 +12,9 @@ import {
   JsonController,
   Body,
   Get,
+  Put,
+  Delete,
+  QueryParams
 } from 'routing-controllers'
 import { NameSpaceService } from '../services'
 import { Prisma } from '@prisma/client'
@@ -38,5 +41,23 @@ export class SessionsController {
       return Response(200,result, '添加成功')
     }
     return Response(200,null, 'namespace已经存在')
+  }
+
+  @Put('/namespaces')
+  async editNmaesoace(@Body() ns: NsParamsType) {
+    const result = await this.nsService.editNs(ns)
+    if(result) {  
+      return Response(200,result, '修改成功')
+    }
+    return Response(200,null, 'namespace不存在')
+  }
+
+  @Delete('/namespaces')
+  async delNmaesoace(@QueryParams() query: NsParamsType) {
+    const result = await this.nsService.delNs(query.namespacesName)
+    if(result) {  
+      return Response(200,result, '删除成功')
+    }
+    return Response(200,null, 'namespace不存在')
   }
 }
