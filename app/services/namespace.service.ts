@@ -2,12 +2,11 @@
  * @Author: sfy
  * @Date: 2022-09-25 23:01:17
  * @LastEditors: sfy
- * @LastEditTime: 2022-09-27 23:05:05
+ * @LastEditTime: 2022-09-28 22:11:10
  * @FilePath: /vul-sys/app/services/namespace.service.ts
  * @Description: update here
  */
 import { Service } from 'typedi'
-import { Prisma } from '@prisma/client'
 import prisma from '../helpers/client'
 import type {NsParamsType} from '../types'
 @Service()

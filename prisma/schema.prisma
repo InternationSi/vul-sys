@@ -14,6 +14,7 @@ model Field {
   selfType  String? @db.VarChar(255)
   Module    Module? @relation(fields: [moduleId], references: [id])
   moduleId  Int?    @db.UnsignedInt
+  options   Json?
 }
 
 model Module {
@@ -24,6 +25,7 @@ model Module {
   category       String?   @db.VarChar(255)
   updateUser     String?   @db.VarChar(255)
   namespacesName String?   @db.VarChar(255)
+  meta           Json?
   fields         Field[]
 }
 

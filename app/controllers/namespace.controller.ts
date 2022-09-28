@@ -2,7 +2,7 @@
  * @Author: sfy
  * @Date: 2022-09-25 23:01:17
  * @LastEditors: sfy
- * @LastEditTime: 2022-09-27 23:05:25
+ * @LastEditTime: 2022-09-28 21:49:47
  * @FilePath: /vul-sys/app/controllers/namespace.controller.ts
  * @Description: update here
  */
@@ -17,7 +17,6 @@ import {
   QueryParams
 } from 'routing-controllers'
 import { NameSpaceService } from '../services'
-import { Prisma } from '@prisma/client'
 import { Service } from 'typedi'
 import {Response} from '../helpers/resposeStruct'
 import type {NsParamsType} from '../types'
