@@ -27,9 +27,15 @@ import type { ModuleParamsType } from '../types'
 export class ModuleController {
   constructor(private moduleService: ModuleService) {}
 
-  @Get('/module/:name')
-  async getModuleInfo() {
-    const namespaces = await this.moduleService.getModuleList
+  @Get('/:namespaceName/module')
+  async getNsModule(
+    @Param("namespaceName") namespaceName: string, 
+    ) {
+      const result = await this.moduleService.getModuleList(namespaceName)
+      if(result) {  
+        return Response(200,result, '查询成功')
+      }
+      return Response(200,null, 'module查询失败')
   }
 
   @Get('/:namespaceName/module/:moduleName')
@@ -37,8 +43,11 @@ export class ModuleController {
     @Param("namespaceName") namespaceName: string, 
     @Param("moduleName") moduleName: string, 
     ) {
-    console.log(namespaceName, 'namespaceName');
-    console.log(moduleName, 'moduleName');
+      const result = await this.moduleService.getModule(moduleName)
+      if(result) {  
+        return Response(200,result, '查询成功')
+      }
+      return Response(200,null, 'module查询失败')
   }
 
   @Post('/:namespaceName/module/:moduleName')
@@ -47,10 +56,15 @@ export class ModuleController {
     @Param("moduleName") moduleName: string, 
     @Body() moduleParams: ModuleParamsType
     ) {
-    console.log(namespaceName, 'namespaceName');
-    console.log(moduleName, 'moduleName');
-    console.log(moduleParams, 'moduleParams');
-    
+      const result = await this.moduleService.addModule({
+        namespaceName,
+        moduleName,
+        ...moduleParams,
+      })    
+      if(result) {  
+        return Response(200,result, '添加成功')
+      }
+      return Response(200,null, 'module添加失败')
   }
 
   @Put('/:namespaceName/module/:moduleName')
@@ -59,9 +73,15 @@ export class ModuleController {
     @Param("moduleName") moduleName: string, 
     @Body() moduleParams: ModuleParamsType
     ) {
-    console.log(namespaceName, 'namespaceName');
-    console.log(moduleName, 'moduleName');
-    console.log(moduleParams, 'moduleParams');
+      const result = await this.moduleService.editModule({
+        namespaceName,
+        moduleName,
+        ...moduleParams,
+      })    
+      if(result) {  
+        return Response(200,result, '更新成功')
+      }
+      return Response(200,null, 'module更新失败')
   }
 
   @Delete('/:namespaceName/module/:moduleName')
@@ -69,8 +89,11 @@ export class ModuleController {
     @Param("namespaceName") namespaceName: string, 
     @Param("moduleName") moduleName: string, 
     ) {
-    console.log(namespaceName, 'namespaceName');
-    console.log(moduleName, 'moduleName');
+      const result = await this.moduleService.delModule(moduleName)
+      if(result) {  
+        return Response(200,result, '删除成功')
+      }
+      return Response(200,null, 'module删除失败')
   }
   
 }

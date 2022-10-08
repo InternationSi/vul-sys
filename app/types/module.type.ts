@@ -11,7 +11,7 @@ export interface ModuleParamsType {
   label: string
   category: string
   updateUser?: string
-  nameSpaceName?: string
+  namespaceName?: string
   meta?: string
 
 }

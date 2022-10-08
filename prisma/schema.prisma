@@ -18,15 +18,15 @@ model Field {
 }
 
 model Module {
-  id             Int       @id @default(autoincrement()) @db.UnsignedInt
-  createdAt      DateTime? @default(now())
-  moduleName     String?   @unique @db.VarChar(255)
-  label          String?   @db.VarChar(255)
-  category       String?   @db.VarChar(255)
-  updateUser     String?   @db.VarChar(255)
-  namespacesName String?   @db.VarChar(255)
-  meta           Json?
-  fields         Field[]
+  id            Int       @id @default(autoincrement()) @db.UnsignedInt
+  createdAt     DateTime? @default(now())
+  moduleName    String?   @unique @db.VarChar(255)
+  label         String?   @db.VarChar(255)
+  category      String?   @db.VarChar(255)
+  updateUser    String?   @db.VarChar(255)
+  namespaceName String?   @db.VarChar(255)
+  meta          Json?
+  fields        Field[]
 }
 
 model NameSpace {
