@@ -1,5 +1,7 @@
 # vul-sys
 
+node 版本建议 14.20.0 必需14版本 
+请使用`n` 或者 `nvm` 来管理node版本
 
 ## dev使用指南
   1. 安装包 `npm intall`

@@ -5,9 +5,11 @@ import { isProd } from './constants'
 import { handleToken } from './verifyToken'
 
 export const useMiddlewares = <T extends Koa>(app: T): T => {
-  app.use((ctx, next) => {
-    return handleToken(ctx, next)
-  })
+
+  // TODO: 暂不启用数据权限验证
+  // app.use((ctx, next) => {
+  //   return handleToken(ctx, next)
+  // })
   if (isProd()) {
     app.use(logger())
   }
