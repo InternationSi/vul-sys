@@ -7,4 +7,5 @@
  * @Description: update here
  */
 export * from './namespace.controller'
+export * from './user.controller'
 export * from './module.controller'

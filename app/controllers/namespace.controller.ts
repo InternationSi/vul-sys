@@ -14,13 +14,12 @@ import {
   Get,
   Put,
   Delete,
-  QueryParams
+  QueryParams,
 } from 'routing-controllers'
 import { NameSpaceService } from '../services'
 import { Service } from 'typedi'
-import {Response} from '../helpers/resposeStruct'
-import type {NsParamsType} from '../types'
-
+import { Response } from '../helpers/resposeStruct'
+import type { NsParamsType } from '../types'
 
 @JsonController()
 @Service()
@@ -30,33 +29,33 @@ export class SessionsController {
   @Get('/namespaces')
   async getNamespacesList() {
     const namespaces = await this.nsService.getList()
-    return Response(200,namespaces, '查询成功')
+    return Response(200, namespaces, '查询成功')
   }
-  
+
   @Post('/namespaces')
   async addNmaesoace(@Body() ns: NsParamsType) {
     const result = await this.nsService.addNs(ns)
-    if(result) {  
-      return Response(200,result, '添加成功')
+    if (result) {
+      return Response(200, result, '添加成功')
     }
-    return Response(200,null, 'namespace已经存在')
+    return Response(200, null, 'namespace已经存在')
   }
 
   @Put('/namespaces')
   async editNmaesoace(@Body() ns: NsParamsType) {
     const result = await this.nsService.editNs(ns)
-    if(result) {  
-      return Response(200,result, '修改成功')
+    if (result) {
+      return Response(200, result, '修改成功')
     }
-    return Response(200,null, 'namespace不存在')
+    return Response(200, null, 'namespace不存在')
   }
 
   @Delete('/namespaces')
   async delNmaesoace(@QueryParams() query: NsParamsType) {
     const result = await this.nsService.delNs(query.namespacesName)
-    if(result) {  
-      return Response(200,result, '删除成功')
+    if (result) {
+      return Response(200, result, '删除成功')
     }
-    return Response(200,null, 'namespace不存在')
+    return Response(200, null, 'namespace不存在')
   }
 }

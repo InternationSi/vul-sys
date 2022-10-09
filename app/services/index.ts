@@ -7,4 +7,5 @@
  * @Description: update here
  */
 export * from './namespace.service'
+export * from './user.service'
 export * from './module.service'
