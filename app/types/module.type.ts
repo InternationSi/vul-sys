@@ -8,7 +8,7 @@
  */
 export interface ModuleParamsType {
   moduleName?: string
-  label: string
+  label?: string
   category: string
   updateUser?: string
   namespaceName?: string

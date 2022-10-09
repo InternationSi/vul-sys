@@ -9,3 +9,4 @@
 export * from './namespace.service'
 export * from './user.service'
 export * from './module.service'
+export * from './field.service'

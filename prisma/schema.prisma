@@ -8,13 +8,14 @@ datasource db {
 }
 
 model Field {
-  id        BigInt  @id @default(autoincrement())
-  fieldName String? @db.VarChar(255)
-  label     String? @db.VarChar(255)
-  selfType  String? @db.VarChar(255)
-  Module    Module? @relation(fields: [moduleId], references: [id])
-  moduleId  Int?    @db.UnsignedInt
-  options   Json?
+  id         BigInt   @id @default(autoincrement())
+  fieldName  String   @db.VarChar(255)
+  label      String?  @db.VarChar(255)
+  selfType   String?  @db.VarChar(255)
+  moduleName String?  @db.VarChar(255)
+  isPrimary  Boolean? @default(false)
+  isUnique   Boolean? @default(false)
+  options    Json?
 }
 
 model Module {
@@ -26,7 +27,6 @@ model Module {
   updateUser    String?   @db.VarChar(255)
   namespaceName String?   @db.VarChar(255)
   meta          Json?
-  fields        Field[]
 }
 
 model NameSpace {

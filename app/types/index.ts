@@ -9,3 +9,4 @@
 export * from './namespace.type'
 export * from './login.type'
 export * from './module.type'
+export * from './field.type'

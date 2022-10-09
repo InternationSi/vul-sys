@@ -9,3 +9,4 @@
 export * from './namespace.controller'
 export * from './user.controller'
 export * from './module.controller'
+export * from './field.controller'
