@@ -12,12 +12,12 @@ import { FieldParamsType } from '../types'
 @Service()
 export class FieldService {
   async getModuleFieldList(moduleName:string) {
-    const moduleList = await prisma.module.findMany({
+    const fieldList = await prisma.field.findMany({
       where: {
         moduleName
       },
     })
-    return moduleList
+    return fieldList
   }
 
   async addModuleField(data: FieldParamsType) {
@@ -25,12 +25,37 @@ export class FieldService {
       const field = await prisma.field.create({
         data,
       })
-      console.log(field);
-      
+      return field
     } catch(e) {
-      console.log(e, 'eee');
-      
+      return false
     }
-    
   }
+
+  async editModuleField(data: FieldParamsType) {
+    try {
+      const field = await prisma.field.update({
+        where: {
+          id:data.id
+        },
+        data,
+      })
+      return field
+    } catch(e) {
+      return false
+    }
+  }
+
+  async delModuleField(data:FieldParamsType) {
+    try {
+      const field = await prisma.field.delete({
+        where: {
+          id:data.id
+        },
+      })
+      return field
+    } catch(e) {
+      return false
+    }
+  }
+
 }

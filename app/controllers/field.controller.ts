@@ -19,21 +19,60 @@ import type { FieldParamsType } from '../types'
 export class FieldController {
   constructor(private fieldService: FieldService) {}
 
-  @Post('/:namespaceName/module/:moduleName/field/:fieldName')
-  async getModule(
+  @Get('/:namespaceName/module/:moduleName/field')
+  async getModuleField(
+    @Param("namespaceName") namespaceName: string, 
+    @Param("moduleName") moduleName: string, 
+    ) {      
+      const result = await this.fieldService.getModuleFieldList(moduleName)
+      if(result) {  
+        return Response(200,result, '查询成功')
+      }
+      return Response(200,null, 'fiel查询失败')
+  }  
+
+
+  @Delete('/:namespaceName/module/:moduleName/field/:fieldName')
+  async delModuleField(
     @Param("namespaceName") namespaceName: string, 
     @Param("moduleName") moduleName: string, 
     @Param("fieldName") fieldName: string, 
     @Body() fieldParams: FieldParamsType
-    ) {
-      console.log(namespaceName,moduleName,fieldName);
-      console.log(fieldParams);
-      
+    ) {      
+      const result = await this.fieldService.delModuleField(fieldParams)
+      if(result) {  
+        return Response(200,result, '删除成功')
+      }
+      return Response(200,null, 'field删除失败')
+  }
+
+  @Post('/:namespaceName/module/:moduleName/field/:fieldName')
+  async addModuleField(
+    @Param("namespaceName") namespaceName: string, 
+    @Param("moduleName") moduleName: string, 
+    @Param("fieldName") fieldName: string, 
+    @Body() fieldParams: FieldParamsType
+    ) {      
       const result = await this.fieldService.addModuleField(fieldParams)
-      // if(result) {  
-      //   return Response(200,result, '查询成功')
-      // }
-      // return Response(200,null, 'module查询失败')
+      
+      if(result) {  
+        return Response(200,result, '添加成功')
+      }
+      return Response(200,null, 'field添加失败')
+  }
+
+  @Put('/:namespaceName/module/:moduleName/field/:fieldName')
+  async editModuleField(
+    @Param("namespaceName") namespaceName: string, 
+    @Param("moduleName") moduleName: string, 
+    @Param("fieldName") fieldName: string, 
+    @Body() fieldParams: FieldParamsType
+    ) {      
+      const result = await this.fieldService.editModuleField(fieldParams)
+      if(result) {  
+        return Response(200,result, '修改成功')
+      }
+      return Response(200,null, 'field修改失败')
   }
   
 }

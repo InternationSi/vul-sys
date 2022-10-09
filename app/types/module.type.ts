@@ -7,6 +7,7 @@
  * @Description: update here
  */
 export interface ModuleParamsType {
+  id?: number,
   moduleName?: string
   label?: string
   category: string

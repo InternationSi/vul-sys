@@ -16,7 +16,7 @@ import {
   Delete,
   QueryParams
 } from 'routing-controllers'
-import { ModuleService } from '../services'
+import { ModuleService, FieldService } from '../services'
 import { Service } from 'typedi'
 import {Response} from '../helpers/resposeStruct'
 import type { ModuleParamsType } from '../types'
@@ -25,7 +25,7 @@ import type { ModuleParamsType } from '../types'
 @JsonController()
 @Service()
 export class ModuleController {
-  constructor(private moduleService: ModuleService) {}
+  constructor(private moduleService: ModuleService, private fieldService: FieldService) {}
 
   @Get('/:namespaceName/module')
   async getNsModule(
@@ -33,6 +33,7 @@ export class ModuleController {
     ) {
       const result = await this.moduleService.getModuleList(namespaceName)
       if(result) {  
+        
         return Response(200,result, '查询成功')
       }
       return Response(200,null, 'module查询失败')
@@ -43,8 +44,14 @@ export class ModuleController {
     @Param("namespaceName") namespaceName: string, 
     @Param("moduleName") moduleName: string, 
     ) {
-      const result = await this.moduleService.getModule(moduleName)
+      const result = await this.moduleService.getModule(moduleName) as any
+      const fieldRes = await this.fieldService.getModuleFieldList(moduleName)
       if(result) {  
+        if(fieldRes) {
+          result.fields = fieldRes
+        } else {
+          result.fields = []
+        }
         return Response(200,result, '查询成功')
       }
       return Response(200,null, 'module查询失败')

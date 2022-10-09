@@ -1,4 +1,5 @@
 export interface FieldParamsType {
+  id?: number,
   fieldName: string
   label?: string
   selfType?: string
