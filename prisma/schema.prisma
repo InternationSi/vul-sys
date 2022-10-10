@@ -8,7 +8,7 @@ datasource db {
 }
 
 model Field {
-  id         Int   @id @default(autoincrement())
+  id         Int      @id @unique @default(autoincrement())
   fieldName  String   @db.VarChar(255)
   label      String?  @db.VarChar(255)
   selfType   String?  @db.VarChar(255)
@@ -19,7 +19,7 @@ model Field {
 }
 
 model Module {
-  id            Int       @id @default(autoincrement()) @db.UnsignedInt
+  id            Int       @id @unique @default(autoincrement())
   createdAt     DateTime? @default(now())
   moduleName    String?   @unique @db.VarChar(255)
   label         String?   @db.VarChar(255)
@@ -35,6 +35,14 @@ model NameSpace {
   namespacesName String?  @unique @db.VarChar(255)
   label          String?  @db.VarChar(255)
   describe       String?  @db.VarChar(255)
+}
+
+model Record {
+  id         Int      @id @unique @default(autoincrement())
+  createdAt  DateTime @default(now())
+  moduleName String?  @db.VarChar(255)
+  values     Json?
+  createUser String?  @db.VarChar(255)
 }
 
 model user {
