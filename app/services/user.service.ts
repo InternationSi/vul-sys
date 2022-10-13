@@ -1,5 +1,6 @@
 import { ILogin } from 'app/types/login.type'
 import { verifyObjIsValue } from 'configs/utils'
+import { genPassword } from 'configs/crypto'
 import { Service } from 'typedi'
 import prisma from '../helpers/client'
 
@@ -20,7 +21,7 @@ export class UserService {
     if (users.length) return { state: 'err', msg: '该用户已注册' }
 
     await prisma.user.create({
-      data: oBody,
+      data: { ...oBody, password: genPassword(oBody.password) },
     })
     return { state: 'success', msg: '' }
   }
@@ -37,8 +38,9 @@ export class UserService {
     if (!users.length) return { state: 'err', msg: '该用户未注册' }
 
     const user = users[0]
-    if (user.password !== oBody.password) return { state: 'err', msg: '账户或密码错误' }
-    else {
+    if (genPassword(user.password) !== genPassword(oBody.password)) {
+      return { state: 'err', msg: '账户或密码错误' }
+    } else {
       const jwt = require('jsonwebtoken')
       const token = jwt.sign(
         { userName: user.userName, phone: user.phone },
