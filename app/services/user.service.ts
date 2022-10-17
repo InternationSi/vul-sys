@@ -38,7 +38,7 @@ export class UserService {
     if (!users.length) return { state: 'err', msg: '该用户未注册' }
 
     const user = users[0]
-    if (genPassword(user.password) !== genPassword(oBody.password)) {
+    if (user.password !== genPassword(oBody.password)) {
       return { state: 'err', msg: '账户或密码错误' }
     } else {
       const jwt = require('jsonwebtoken')
