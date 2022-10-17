@@ -4,7 +4,7 @@
   "license": "MIT",
   "main": "app.ts",
   "scripts": {
-    "dev": "export NODE_ENV=development; nodemon ts-node-dev -r tsconfig-paths/register app.ts",
+    "dev": "nodemon ts-node-dev -r tsconfig-paths/register app.ts",
     "dev:db": "docker compose -f docker-compose.yml up -d",
     "prettier": "prettier --write '**/*.{js,ts}'",
     "test": "jest --config .jest.config.js --no-cache --detectOpenHandles",
